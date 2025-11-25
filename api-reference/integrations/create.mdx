@@ -1,0 +1,45 @@
+---
+title: "Create Integration"
+api: "POST /api/integrations"
+---
+
+## Description
+
+Create a new integration.
+
+## Authentication
+
+Required (API key or JWT token)
+
+## Request Body
+
+<ParamField body="providerCode" type="string" required>
+  Integration provider code (e.g., "notion", "slack")
+</ParamField>
+
+<ParamField body="name" type="string" required>
+  Integration name
+</ParamField>
+
+<ParamField body="agentId" type="string">
+  Optional agent ID to link integration
+</ParamField>
+
+<ParamField body="credentials" type="object" required>
+  Integration credentials (OAuth tokens, API keys, etc.)
+</ParamField>
+
+<ParamField body="config" type="object">
+  Integration configuration
+</ParamField>
+
+## Response
+
+<ResponseField name="id" type="string">
+  Created integration ID
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  Success message
+</ResponseField>
+

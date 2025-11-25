@@ -1,0 +1,25 @@
+---
+title: "Get Messages"
+api: "GET /api/agents/{agentId}/messages"
+---
+
+## Description
+
+Get conversation messages for a thread.
+
+## Authentication
+
+Required (API key or JWT token)
+
+## Query Parameters
+
+<ParamField query="threadId" type="string" required>
+  The thread ID to get messages for
+</ParamField>
+
+## Response
+
+<ResponseField name="messages" type="array">
+  Array of message objects
+</ResponseField>
+

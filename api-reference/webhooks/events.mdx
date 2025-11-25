@@ -1,0 +1,84 @@
+---
+title: "Webhook Events"
+description: "Available webhook events and their payloads"
+---
+
+## Available Events
+
+### Message Events
+
+#### `message.created`
+
+Triggered when a new message is sent by a user.
+
+```json
+{
+  "id": "evt_123",
+  "type": "message.created",
+  "timestamp": 1734567890,
+  "data": {
+    "messageId": "msg_abc123",
+    "agentId": "agent_xyz",
+    "threadId": "thread_123",
+    "role": "user",
+    "content": "Hello, I need help",
+    "userId": "user_123",
+    "createdAt": "2024-01-15T10:30:00Z"
+  }
+}
+```
+
+#### `message.completed`
+
+Triggered when the agent completes a response.
+
+```json
+{
+  "id": "evt_124",
+  "type": "message.completed",
+  "timestamp": 1734567891,
+  "data": {
+    "messageId": "msg_abc124",
+    "agentId": "agent_xyz",
+    "threadId": "thread_123",
+    "role": "assistant",
+    "content": "Hello! How can I help you today?",
+    "model": "gpt-4",
+    "tokensUsed": {
+      "prompt": 150,
+      "completion": 50,
+      "total": 200
+    },
+    "createdAt": "2024-01-15T10:30:05Z"
+  }
+}
+```
+
+### Conversation Events
+
+#### `conversation.started`
+
+Triggered when a new conversation begins.
+
+#### `conversation.ended`
+
+Triggered when a conversation ends.
+
+### User Events
+
+#### `user.feedback`
+
+Triggered when a user provides feedback (thumbs up/down).
+
+### Error Events
+
+#### `error.occurred`
+
+Triggered when an error occurs during conversation.
+
+## Webhook Security
+
+All webhook requests include a signature header (`X-Convosphere-Signature`) for verification. Always verify signatures to ensure requests are from Convosphere AI.
+
+See [Webhooks Guide](/integrations/webhooks) for signature verification examples.
+

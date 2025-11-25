@@ -1,0 +1,151 @@
+---
+title: "Webhooks"
+description: "Receive real-time events from Convosphere AI"
+---
+
+## Overview
+
+Webhooks allow you to receive real-time events from Convosphere AI in your application. They enable real-time integration with your systems.
+
+## Setting Up Webhooks
+
+### Step 1: Create a Webhook Endpoint
+
+Create an HTTP endpoint in your application that can receive POST requests:
+
+```javascript
+// Example Express.js endpoint
+app.post('/webhooks/convosphere', (req, res) => {
+  const event = req.body;
+  // Process event
+  res.status(200).send('OK');
+});
+```
+
+### Step 2: Configure Webhook in Convosphere
+
+1. Go to your agent dashboard
+2. Navigate to **Integrations** → **Webhooks**
+3. Click **Create Webhook**
+4. Enter your webhook URL
+5. Select events you want to receive
+6. Save the webhook
+
+### Step 3: Verify Webhook
+
+After creating the webhook, Convosphere AI will send a test event to verify your endpoint is working.
+
+## Available Events
+
+### Message Events
+
+- **`message.created`**: Triggered when a new message is sent by a user
+- **`message.completed`**: Triggered when the agent completes a response
+
+### Conversation Events
+
+- **`conversation.started`**: Triggered when a new conversation begins
+- **`conversation.ended`**: Triggered when a conversation ends
+
+### User Events
+
+- **`user.feedback`**: Triggered when a user provides feedback (thumbs up/down)
+
+### Error Events
+
+- **`error.occurred`**: Triggered when an error occurs during conversation
+
+## Webhook Security
+
+### Signature Verification
+
+All webhook requests include a signature header for verification. Verify signatures to ensure requests are from Convosphere AI.
+
+#### Node.js Example
+
+```javascript
+const crypto = require('crypto');
+
+function verifyWebhookSignature(payload, signature, secret) {
+  const hmac = crypto.createHmac('sha256', secret);
+  const expectedSignature = hmac.update(JSON.stringify(payload)).digest('hex');
+  return crypto.timingSafeEqual(
+    Buffer.from(signature),
+    Buffer.from(expectedSignature)
+  );
+}
+
+app.post('/webhooks/convosphere', express.raw({ type: 'application/json' }), (req, res) => {
+  const signature = req.headers['x-convosphere-signature'];
+  const secret = process.env.WEBHOOK_SECRET;
+  
+  if (!verifyWebhookSignature(req.body, signature, secret)) {
+    return res.status(401).send('Invalid signature');
+  }
+  
+  const event = JSON.parse(req.body);
+  // Process event
+  res.status(200).send('OK');
+});
+```
+
+## Retry Policy
+
+Convosphere AI uses exponential backoff for failed webhook deliveries:
+
+- **Initial Retry**: 1 minute after failure
+- **Subsequent Retries**: 2 minutes, 4 minutes, 8 minutes, 16 minutes
+- **Max Retries**: 5 attempts
+- **Stop on 4xx**: 4xx errors (except 429) stop retries
+- **Retry on 5xx**: 5xx errors trigger retries
+
+## Best Practices
+
+1. **Respond Quickly**: Return 200 OK within 5 seconds
+2. **Handle Idempotency**: Events may be delivered multiple times
+3. **Log Events**: Keep logs for debugging
+4. **Queue Processing**: Use queues for async processing
+5. **Error Handling**: Return appropriate status codes
+
+## Testing Webhooks
+
+### Using ngrok
+
+1. Install ngrok: `npm install -g ngrok`
+2. Expose local server: `ngrok http 3000`
+3. Use the ngrok URL as your webhook URL
+
+### Using Webhook.site
+
+1. Visit [webhook.site](https://webhook.site)
+2. Copy the unique URL
+3. Use it as your webhook URL
+
+## Troubleshooting
+
+### Webhook Not Receiving Events
+
+- Verify webhook URL is accessible
+- Check webhook status in dashboard
+- Review webhook logs
+- Ensure events are selected
+- Check firewall/network settings
+
+### Signature Verification Fails
+
+- Verify secret matches in both systems
+- Check signature header name
+- Ensure payload is not modified
+- Verify JSON encoding
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Integration Guide" icon="plug" href="/integrations/overview">
+    Other integration options
+  </Card>
+  <Card title="API Reference" icon="terminal" href="/api-reference/introduction">
+    Webhook management endpoints
+  </Card>
+</CardGroup>
+

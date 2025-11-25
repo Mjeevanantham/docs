@@ -1,33 +1,184 @@
 ---
-title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+title: "API Reference"
+description: "Complete API documentation for Convosphere AI"
 ---
 
-<Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
-</Note>
+## Base URL
 
-## Welcome
-
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
-
-<Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
->
-  View the OpenAPI specification file
-</Card>
+```
+https://api.convosphere.ai/api
+```
 
 ## Authentication
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
+All API requests require authentication. See [Authentication Guide](/guides/authentication) for details.
+
+### Using API Keys
+
+Include your API key in the `Authorization` header:
+
+```http
+Authorization: Bearer conv_YOUR_API_KEY
+```
+
+### Using JWT Tokens
+
+Include your access token in the `Authorization` header:
+
+```http
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+```
+
+## Rate Limits
+
+API requests are rate-limited based on your plan:
+
+- **Free**: 100 requests/minute
+- **Starter**: 500 requests/minute
+- **Business**: 2,000 requests/minute
+- **Pro**: 10,000 requests/minute
+
+Rate limit headers are included in responses:
+
+```
+X-RateLimit-Limit: 100
+X-RateLimit-Remaining: 95
+X-RateLimit-Reset: 1640000000
+```
+
+## Error Responses
+
+All errors follow this format:
 
 ```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
+{
+  "error": "Error code",
+  "message": "Human-readable error message"
+}
 ```
+
+Common HTTP status codes:
+
+- `200` - Success
+- `201` - Created
+- `400` - Bad Request
+- `401` - Unauthorized
+- `403` - Forbidden
+- `404` - Not Found
+- `429` - Rate Limit Exceeded
+- `500` - Internal Server Error
+
+## API Endpoints
+
+### Authentication
+
+- [Login](/api-reference/authentication/login) - Authenticate and receive tokens
+- [Signup](/api-reference/authentication/signup) - Create a new account
+- [Refresh Token](/api-reference/authentication/tokens) - Get new access token
+
+### Agents
+
+- [List Agents](/api-reference/agents/list) - Get all agents
+- [Create Agent](/api-reference/agents/create) - Create a new agent
+- [Get Agent](/api-reference/agents/get) - Get agent details
+- [Update Agent](/api-reference/agents/update) - Update an agent
+- [Delete Agent](/api-reference/agents/delete) - Delete an agent
+
+### Chat
+
+- [Send Message](/api-reference/chat/send-message) - Send a message to an agent
+- [Stream Message](/api-reference/chat/stream) - Get streaming response
+- [Get Messages](/api-reference/chat/messages) - Get conversation messages
+- [Get Conversations](/api-reference/chat/conversations) - Get all conversations
+
+### Knowledge Base
+
+- [List Documents](/api-reference/knowledge/list-documents) - Get all documents
+- [Upload Document](/api-reference/knowledge/upload-document) - Upload a document
+- [Add URL](/api-reference/knowledge/add-url) - Add a URL to knowledge base
+- [Delete Document](/api-reference/knowledge/delete-document) - Delete a document
+
+### Integrations
+
+- [List Integrations](/api-reference/integrations/list) - Get all integrations
+- [Create Integration](/api-reference/integrations/create) - Create an integration
+- [List Providers](/api-reference/integrations/providers) - Get available providers
+
+### Webhooks
+
+- [List Webhooks](/api-reference/webhooks/list) - Get all webhooks
+- [Create Webhook](/api-reference/webhooks/create) - Create a webhook
+- [Webhook Events](/api-reference/webhooks/events) - Available webhook events
+
+## SDKs and Libraries
+
+### JavaScript/TypeScript
+
+```bash
+npm install @convosphere/ai-sdk
+```
+
+```javascript
+import { ConvosphereClient } from '@convosphere/ai-sdk';
+
+const client = new ConvosphereClient({
+  apiKey: 'conv_YOUR_API_KEY'
+});
+
+const response = await client.agents.chat('agent_123', {
+  message: 'Hello',
+  stream: false
+});
+```
+
+### Python
+
+```bash
+pip install convosphere-ai
+```
+
+```python
+from convosphere import ConvosphereClient
+
+client = ConvosphereClient(api_key='conv_YOUR_API_KEY')
+
+response = client.agents.chat('agent_123', {
+    'message': 'Hello',
+    'stream': False
+})
+```
+
+## Quick Start Example
+
+```bash
+# Get your API key from the dashboard
+export CONVOSPHERE_API_KEY="conv_YOUR_API_KEY"
+
+# List your agents
+curl -H "Authorization: Bearer $CONVOSPHERE_API_KEY" \
+  https://api.convosphere.ai/api/agents
+
+# Send a message
+curl -X POST \
+  -H "Authorization: Bearer $CONVOSPHERE_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"message": "Hello", "stream": false}' \
+  https://api.convosphere.ai/api/agents/agent_123/chat
+```
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Authentication Guide" icon="key" href="/guides/authentication">
+    Learn about authentication
+  </Card>
+  <Card title="Webhooks Guide" icon="plug" href="/integrations/webhooks">
+    Set up webhooks
+  </Card>
+  <Card title="Integration Guide" icon="plug" href="/integrations/overview">
+    Connect services
+  </Card>
+  <Card title="Getting Started" icon="rocket" href="/getting-started">
+    Quick start guide
+  </Card>
+</CardGroup>

@@ -1,0 +1,41 @@
+---
+title: "Create Webhook"
+api: "POST /api/integrations/webhooks"
+---
+
+## Description
+
+Create a new webhook.
+
+## Authentication
+
+Required (API key or JWT token)
+
+## Request Body
+
+<ParamField body="url" type="string" required>
+  Webhook URL endpoint
+</ParamField>
+
+<ParamField body="events" type="array" required>
+  Array of event types to subscribe to
+</ParamField>
+
+<ParamField body="secret" type="string">
+  Optional webhook secret for signature verification
+</ParamField>
+
+## Response
+
+<ResponseField name="id" type="string">
+  Created webhook ID
+</ResponseField>
+
+<ResponseField name="url" type="string">
+  Webhook URL
+</ResponseField>
+
+<ResponseField name="events" type="array">
+  Subscribed events
+</ResponseField>
+

@@ -1,0 +1,43 @@
+---
+title: "Update Agent"
+api: "PUT /api/agents/{agentId}"
+---
+
+## Description
+
+Update an existing agent.
+
+## Authentication
+
+Required (API key or JWT token)
+
+## Path Parameters
+
+<ParamField path="agentId" type="string" required>
+  The ID of the agent to update
+</ParamField>
+
+## Request Body
+
+<ParamField body="name" type="string">
+  Updated agent name
+</ParamField>
+
+<ParamField body="description" type="string">
+  Updated description
+</ParamField>
+
+<ParamField body="systemPrompt" type="string">
+  Updated system prompt
+</ParamField>
+
+<ParamField body="model" type="string">
+  Updated AI model
+</ParamField>
+
+## Response
+
+<ResponseField name="agent" type="object">
+  Updated agent object
+</ResponseField>
+

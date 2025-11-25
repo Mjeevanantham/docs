@@ -1,0 +1,55 @@
+---
+title: "List Agents"
+api: "GET /api/agents"
+---
+
+## Description
+
+Get list of all agents for the authenticated user.
+
+## Authentication
+
+Required (API key or JWT token)
+
+## Query Parameters
+
+None
+
+## Response
+
+<ResponseField name="agents" type="array">
+  Array of agent objects
+</ResponseField>
+
+## Example Request
+
+```bash
+curl -H "Authorization: Bearer conv_YOUR_API_KEY" \
+  https://api.convosphere.ai/api/agents
+```
+
+## Example Response
+
+```json
+{
+  "agents": [
+    {
+      "id": "agent_123",
+      "name": "Customer Support Bot",
+      "description": "Helps customers with support questions",
+      "systemPrompt": "You are a helpful support agent...",
+      "model": "gpt-4",
+      "status": "active",
+      "createdAt": "2024-01-15T10:00:00Z",
+      "updatedAt": "2024-01-15T10:00:00Z"
+    }
+  ]
+}
+```
+
+## Error Responses
+
+<ResponseField name="401" type="object">
+  Unauthorized - Invalid or missing authentication
+</ResponseField>
+

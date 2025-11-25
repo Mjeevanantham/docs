@@ -1,0 +1,63 @@
+---
+title: "Slack Integration"
+description: "Connect your agent to Slack"
+---
+
+## Overview
+
+Connect your agent to Slack to send notifications and interact with Slack channels.
+
+## Setup Steps
+
+### Step 1: Create a Slack App
+
+1. Go to [api.slack.com/apps](https://api.slack.com/apps)
+2. Click **Create New App**
+3. Choose **From scratch**
+4. Name your app and select your workspace
+
+### Step 2: Configure OAuth
+
+1. Go to **OAuth & Permissions** in your app settings
+2. Add the following scopes:
+   - `chat:write` - Send messages
+   - `channels:read` - Read channel information
+   - `im:read` - Read direct messages
+   - `im:write` - Send direct messages
+3. Add redirect URL: `https://your-domain.com/api/integrations/oauth/slack/callback`
+
+### Step 3: Connect in Convosphere
+
+1. Go to your agent dashboard
+2. Navigate to **Integrations**
+3. Click **Add Integration** → **Slack**
+4. Authorize the connection
+5. Select channels or users to interact with
+
+## Features
+
+- Send messages to Slack channels
+- Receive notifications in Slack
+- Direct message support
+- Channel integration
+
+## Troubleshooting
+
+### Connection Fails
+
+- Verify OAuth credentials are correct
+- Check redirect URL matches exactly
+- Ensure required scopes are granted
+
+### Messages Not Sending
+
+- Check integration status
+- Verify channel permissions
+- Review error logs
+
+## Next Steps
+
+<Card title="Integration Overview" icon="plug" href="/integrations/overview">
+  Learn about other integrations
+</Card>
+

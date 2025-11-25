@@ -1,0 +1,290 @@
+---
+title: "Agent Guide"
+description: "Create, configure, and manage AI agents"
+---
+
+## What is an Agent?
+
+An agent is an AI chatbot that can:
+
+- Answer questions based on your knowledge base
+- Have conversations with users
+- Learn from documents and URLs
+- Integrate with external services
+- Provide 24/7 customer support
+
+## Creating an Agent
+
+### Basic Creation
+
+1. Go to your dashboard
+2. Click **Create Agent** or **New Agent**
+3. Fill in the required information:
+
+   - **Name**: A descriptive name (e.g., "Customer Support Bot")
+   - **Description**: What your agent does (optional)
+   - **System Prompt**: How your agent should behave (optional)
+
+4. Click **Create**
+
+### Using Templates
+
+1. Click **Create Agent**
+2. Select **Use Template**
+3. Choose from available templates:
+
+   - Customer Support
+   - Sales Assistant
+   - FAQ Bot
+   - Technical Support
+   - Custom
+
+4. Customize the template
+5. Click **Create**
+
+## Agent Configuration
+
+### System Prompt
+
+The system prompt defines your agent's personality and behavior. Examples:
+
+**Customer Support Agent**:
+
+```
+You are a helpful customer support agent. Be friendly, professional, and concise.
+Always try to solve the customer's problem. If you can't help, offer to escalate
+to a human agent.
+```
+
+**Sales Assistant**:
+
+```
+You are a sales assistant. Help customers find the right products. Ask qualifying
+questions. Be enthusiastic but not pushy. Always mention special offers when relevant.
+```
+
+### Model Selection
+
+Choose the AI model for your agent:
+
+- **GPT-4**: Most capable, best for complex tasks
+- **GPT-4 Turbo**: Fast and capable
+- **GPT-3.5 Turbo**: Fast and cost-effective
+- **Claude 3 Opus**: Excellent for long conversations
+- **Claude 3 Sonnet**: Balanced performance
+- **Claude 3 Haiku**: Fast and efficient
+
+### Model Parameters
+
+- **Temperature** (0-2): Controls randomness. Lower = more focused, Higher = more creative
+- **Max Tokens**: Maximum response length
+- **Top P**: Nucleus sampling parameter
+
+### Training Mode
+
+Choose how your agent learns:
+
+- **None**: No training, uses only system prompt
+- **RAG** (Retrieval Augmented Generation): Uses knowledge base for context
+- **Fine-tuned**: Uses a custom fine-tuned model
+- **Hybrid**: Combines RAG and fine-tuning
+
+## Knowledge Base
+
+### Adding Documents
+
+1. Go to your agent dashboard
+2. Navigate to **Knowledge Base** or **Sources**
+3. Click **Upload Document**
+4. Select files (PDF, Word, Text)
+5. Wait for processing to complete
+
+### Adding URLs
+
+1. Go to **Knowledge Base**
+2. Click **Add URL**
+3. Enter the URL
+4. Configure scraping options:
+
+   - **Single Page**: Scrape just this page
+   - **Site Crawl**: Crawl the entire website
+   - **Depth**: How many levels to crawl
+   - **Max Pages**: Maximum pages to scrape
+
+5. Click **Add**
+
+### Connecting Notion
+
+1. Go to **Knowledge Base**
+2. Click **Connect Notion**
+3. Authorize the connection
+4. Select pages and databases to sync
+5. Click **Sync**
+
+See [Notion Integration](/integrations/notion) for detailed setup.
+
+## Agent Settings
+
+### General Settings
+
+- **Name**: Agent name
+- **Description**: Agent description
+- **Status**: Active, Inactive, Training, Archived
+- **Version**: Agent version number
+
+### Advanced Settings
+
+- **Embed Code**: Unique code for widget embedding
+- **API Key**: Agent-specific API key
+- **Organization**: Link to organization (if applicable)
+
+## Widget Customization
+
+Customize how your agent appears to users:
+
+### Appearance
+
+- **Primary Color**: Main brand color
+- **Launcher Icon**: Icon style
+- **Launcher Shape**: Circle or square
+- **Widget Style**: Glass, solid, or minimal
+
+### Behavior
+
+- **Auto-open**: Automatically open widget
+- **Auto-open Delay**: Delay before auto-opening
+- **File Uploads**: Allow file uploads
+- **Suggested Replies**: Show suggested responses
+
+### Content
+
+- **Title**: Widget header title
+- **Subtitle**: Widget header subtitle
+- **Initial Message**: First message shown
+- **Suggested Questions**: Pre-defined questions
+
+See [Widget Embed Guide](/guides/widget-embed) for details.
+
+## Agent Analytics
+
+View performance metrics:
+
+- **Total Conversations**: Number of conversations
+- **Total Messages**: Number of messages
+- **Average Response Time**: Average time to respond
+- **User Satisfaction**: Feedback ratings
+- **Popular Questions**: Most asked questions
+- **Conversation Flow**: How conversations progress
+
+## Managing Agents
+
+### Editing an Agent
+
+1. Go to your dashboard
+2. Click on the agent you want to edit
+3. Make changes
+4. Click **Save**
+
+### Duplicating an Agent
+
+1. Go to agent settings
+2. Click **Duplicate**
+3. Enter a new name
+4. Click **Duplicate**
+
+### Archiving an Agent
+
+1. Go to agent settings
+2. Click **Archive**
+3. Confirm archiving
+
+Archived agents are hidden but not deleted. You can restore them later.
+
+### Deleting an Agent
+
+1. Go to agent settings
+2. Click **Delete**
+3. Type the agent name to confirm
+4. Click **Delete**
+
+<Warning>This action cannot be undone.</Warning>
+
+## Agent Limits
+
+Plan-based limits on agents:
+
+- **Free**: 1 agent
+- **Starter**: 3 agents
+- **Business**: 10 agents
+- **Pro**: Unlimited agents
+
+## Best Practices
+
+### System Prompts
+
+1. **Be Specific**: Clearly define the agent's role
+2. **Set Boundaries**: Define what the agent should and shouldn't do
+3. **Provide Examples**: Include example interactions
+4. **Update Regularly**: Refine prompts based on performance
+
+### Knowledge Base
+
+1. **Quality Over Quantity**: Focus on relevant, accurate content
+2. **Keep Updated**: Regularly update documents
+3. **Organize Content**: Use clear file names and structure
+4. **Test Coverage**: Ensure knowledge base covers common questions
+
+### Testing
+
+1. **Test Regularly**: Test agent responses before going live
+2. **Monitor Performance**: Review analytics regularly
+3. **Gather Feedback**: Collect user feedback
+4. **Iterate**: Continuously improve based on feedback
+
+## Troubleshooting
+
+### Agent Not Responding
+
+- Check agent status (should be "Active")
+- Verify model is selected
+- Check system prompt is set
+- Review error logs
+
+### Poor Responses
+
+- Improve system prompt
+- Add more knowledge base content
+- Adjust temperature parameter
+- Review conversation logs
+
+### Knowledge Base Not Working
+
+- Verify documents are processed
+- Check knowledge base status
+- Ensure training mode is set to "RAG"
+- Review document quality
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card
+    title="Knowledge Base Guide"
+    icon="database"
+    href="/guides/knowledge-base"
+  >
+    Learn about knowledge base management
+  </Card>
+  <Card title="Widget Embed" icon="code" href="/guides/widget-embed">
+    Customize your widget
+  </Card>
+  <Card
+    title="API Reference"
+    icon="terminal"
+    href="/api-reference/introduction"
+  >
+    Programmatic access
+  </Card>
+  <Card title="Integrations" icon="plug" href="/integrations/overview">
+    Connect external services
+  </Card>
+</CardGroup>

@@ -1,0 +1,33 @@
+---
+title: "Upload Document"
+api: "POST /api/agents/{agentId}/knowledge/file"
+---
+
+## Description
+
+Upload a document to the knowledge base.
+
+## Authentication
+
+Required (API key or JWT token)
+
+## Request Body
+
+<ParamField body="file" type="file" required>
+  Document file (PDF, Word, Text, Markdown)
+</ParamField>
+
+## Response
+
+<ResponseField name="success" type="boolean">
+  Whether upload was successful
+</ResponseField>
+
+<ResponseField name="documentId" type="string">
+  ID of the created document
+</ResponseField>
+
+<ResponseField name="status" type="string">
+  Processing status (pending, processing, indexed, failed)
+</ResponseField>
+

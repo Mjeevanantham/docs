@@ -1,0 +1,25 @@
+---
+title: "Delete Document"
+api: "DELETE /api/agents/{agentId}/knowledge/documents/{documentId}"
+---
+
+## Description
+
+Delete a document from the knowledge base.
+
+## Authentication
+
+Required (API key or JWT token)
+
+## Path Parameters
+
+<ParamField path="documentId" type="string" required>
+  The ID of the document to delete
+</ParamField>
+
+## Response
+
+<ResponseField name="success" type="boolean">
+  Whether deletion was successful
+</ResponseField>
+

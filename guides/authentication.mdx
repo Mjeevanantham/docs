@@ -1,0 +1,296 @@
+---
+title: "Authentication"
+description: "User authentication and API key management"
+---
+
+## Overview
+
+Convosphere AI supports multiple authentication methods:
+
+1. **Email/Password**: Traditional credentials-based authentication
+2. **OAuth Providers**: Google, Facebook, GitHub
+3. **API Keys**: For programmatic access
+
+## User Authentication
+
+### Email/Password Signup
+
+1. Visit the signup page
+2. Enter your:
+   - Name
+   - Email address
+   - Password (minimum 8 characters)
+   - Optional: Company, country, phone
+3. Click **Sign Up**
+4. Check your email for verification link
+5. Click the verification link to activate your account
+
+### Email/Password Login
+
+1. Go to the login page
+2. Enter your email and password
+3. Click **Login**
+
+<Warning>
+Email verification is required for credentials-based accounts.
+</Warning>
+
+### OAuth Login
+
+You can sign in with:
+
+- **Google**: Click "Sign in with Google"
+- **Facebook**: Click "Sign in with Facebook"
+- **GitHub**: Click "Sign in with GitHub"
+
+OAuth accounts are automatically verified and don't require email verification.
+
+### Password Reset
+
+1. Go to the login page
+2. Click **Forgot Password**
+3. Enter your email address
+4. Check your email for reset instructions
+5. Click the reset link and set a new password
+
+## API Authentication
+
+### API Keys
+
+API keys provide programmatic access to Convosphere AI without user sessions.
+
+#### Creating an API Key
+
+1. Go to your dashboard
+2. Navigate to **Settings** → **API Keys**
+3. Click **Create API Key**
+4. Enter a name for the key (e.g., "Production API Key")
+5. Select scopes (permissions):
+   - `agents:read` - Read agents
+   - `agents:write` - Create/update agents
+   - `chat:read` - Read conversations
+   - `chat:write` - Send messages
+   - `knowledge:read` - Read knowledge base
+   - `knowledge:write` - Manage knowledge base
+6. Optionally set an expiration date
+7. Click **Create**
+8. **Copy the key immediately** - it won't be shown again
+
+#### Using API Keys
+
+Include your API key in the `Authorization` header:
+
+```bash
+curl -H "Authorization: Bearer conv_YOUR_API_KEY" \
+  https://api.convosphere.ai/api/agents
+```
+
+#### API Key Format
+
+API keys follow this format:
+```
+conv_<base64-encoded-random-string>
+```
+
+Example:
+```
+conv_abc123def456ghi789jkl012mno345pqr678stu901vwx234yz
+```
+
+#### API Key Scopes
+
+- **`agents:read`**: List and view agents
+- **`agents:write`**: Create, update, and delete agents
+- **`chat:read`**: Read conversations and messages
+- **`chat:write`**: Send messages and create conversations
+- **`knowledge:read`**: Read knowledge base documents
+- **`knowledge:write`**: Add, update, and delete knowledge base documents
+- **`integrations:read`**: View integrations
+- **`integrations:write`**: Manage integrations
+- **`webhooks:read`**: View webhooks
+- **`webhooks:write`**: Manage webhooks
+
+#### Managing API Keys
+
+- **View Keys**: See all your API keys with their prefixes
+- **Revoke Keys**: Disable a key immediately
+- **Rotate Keys**: Create a new key and revoke the old one
+- **Set Expiration**: Keys can have expiration dates
+
+### JWT Tokens
+
+For session-based authentication, Convosphere AI uses JWT tokens.
+
+#### Getting a Token
+
+Login via the API:
+
+```http
+POST /api/auth/login
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "your-password"
+}
+```
+
+Response:
+
+```json
+{
+  "success": true,
+  "user": {
+    "id": "user_123",
+    "email": "user@example.com",
+    "name": "John Doe"
+  },
+  "tokens": {
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+  }
+}
+```
+
+#### Using Access Tokens
+
+Include the access token in the `Authorization` header:
+
+```http
+GET /api/agents
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+```
+
+#### Refreshing Tokens
+
+Access tokens expire after 15 minutes. Use the refresh token to get a new access token:
+
+```http
+POST /api/auth/refresh
+Content-Type: application/json
+
+{
+  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+```
+
+## Security Best Practices
+
+### For Users
+
+1. **Use Strong Passwords**: Minimum 8 characters, mix of letters, numbers, and symbols
+2. **Enable 2FA**: If available, enable two-factor authentication
+3. **Don't Share Credentials**: Never share your password or API keys
+4. **Use OAuth When Possible**: OAuth is more secure than passwords
+5. **Regular Key Rotation**: Rotate API keys periodically
+
+### For Developers
+
+1. **Store Keys Securely**: Never commit API keys to version control
+2. **Use Environment Variables**: Store keys in environment variables
+3. **Rotate Keys Regularly**: Create new keys and revoke old ones
+4. **Use Least Privilege**: Only grant necessary scopes
+5. **Monitor Key Usage**: Review API key usage regularly
+6. **Implement Rate Limiting**: Rate limit API requests
+7. **Verify Signatures**: Always verify webhook signatures
+
+### API Key Security
+
+- **Never Expose in Frontend**: API keys should only be used server-side
+- **Use Scoped Keys**: Create keys with minimal required permissions
+- **Set Expiration**: Set expiration dates for temporary keys
+- **Revoke Immediately**: Revoke compromised keys immediately
+- **Monitor Usage**: Watch for unusual API key usage
+
+## Rate Limits
+
+API requests are rate-limited to prevent abuse:
+
+- **Free Plan**: 100 requests per minute
+- **Starter Plan**: 500 requests per minute
+- **Business Plan**: 2,000 requests per minute
+- **Pro Plan**: 10,000 requests per minute
+
+Rate limit headers are included in responses:
+
+```
+X-RateLimit-Limit: 100
+X-RateLimit-Remaining: 95
+X-RateLimit-Reset: 1640000000
+```
+
+## Error Responses
+
+### Authentication Errors
+
+**401 Unauthorized**:
+```json
+{
+  "error": "Unauthorized",
+  "message": "Invalid or expired token"
+}
+```
+
+**403 Forbidden**:
+```json
+{
+  "error": "Forbidden",
+  "message": "Insufficient permissions"
+}
+```
+
+**429 Too Many Requests**:
+```json
+{
+  "error": "Rate limit exceeded",
+  "message": "Too many requests. Please try again later."
+}
+```
+
+## Session Management
+
+### Concurrent Sessions
+
+Users can have up to 5 concurrent sessions. When the limit is reached, the oldest session is terminated.
+
+### Session Expiration
+
+- **Access Tokens**: 15 minutes
+- **Refresh Tokens**: 7 days
+- **Sessions**: 24 hours of inactivity
+
+## Troubleshooting
+
+### Login Issues
+
+- **Email Not Verified**: Check your email for verification link
+- **Invalid Credentials**: Verify email and password are correct
+- **Account Locked**: Contact support if account is locked
+
+### API Key Issues
+
+- **Invalid Key**: Verify the key is correct and not revoked
+- **Expired Key**: Create a new API key
+- **Insufficient Permissions**: Check key scopes
+- **Rate Limited**: Wait before making more requests
+
+### Token Issues
+
+- **Expired Token**: Use refresh token to get new access token
+- **Invalid Token**: Re-authenticate to get new tokens
+- **Token Not Accepted**: Verify token format and expiration
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="API Reference" icon="terminal" href="/api-reference/introduction">
+    Complete API documentation
+  </Card>
+  <Card title="Integration Guide" icon="plug" href="/integrations/overview">
+    OAuth setup
+  </Card>
+  <Card title="Agent Guide" icon="robot" href="/guides/agents">
+    Agent management
+  </Card>
+</CardGroup>
+

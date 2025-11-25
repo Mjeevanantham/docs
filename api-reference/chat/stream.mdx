@@ -1,0 +1,38 @@
+---
+title: "Stream Message"
+api: "POST /api/agents/{agentId}/chat"
+---
+
+## Description
+
+Send a message and receive a streaming response using Server-Sent Events (SSE).
+
+## Authentication
+
+Required (API key or JWT token)
+
+## Request Body
+
+<ParamField body="message" type="string" required>
+  The message to send
+</ParamField>
+
+<ParamField body="stream" type="boolean" required>
+  Set to `true` for streaming
+</ParamField>
+
+<ParamField body="threadId" type="string">
+  Optional thread ID
+</ParamField>
+
+## Response
+
+Server-Sent Events stream with chunks:
+
+```
+data: {"chunk": "Hello"}
+data: {"chunk": "!"}
+data: {"chunk": " How"}
+data: [DONE]
+```
+

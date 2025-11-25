@@ -1,0 +1,86 @@
+---
+title: "Login"
+api: "POST /api/auth/login"
+---
+
+## Description
+
+Authenticate user and receive JWT tokens. Supports credentials provider with password verification.
+
+## Authentication
+
+None (public endpoint)
+
+## Request Body
+
+<ParamField body="email" type="string" required>
+  User email address
+</ParamField>
+
+<ParamField body="password" type="string" required>
+  User password
+</ParamField>
+
+## Response
+
+<ResponseField name="success" type="boolean">
+  Whether the login was successful
+</ResponseField>
+
+<ResponseField name="user" type="object">
+  User object with id, email, name, role, and planTier
+</ResponseField>
+
+<ResponseField name="tokens" type="object">
+  JWT tokens (accessToken and refreshToken)
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  Success message
+</ResponseField>
+
+## Example Request
+
+```bash
+curl -X POST https://api.convosphere.ai/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "user@example.com",
+    "password": "your-password"
+  }'
+```
+
+## Example Response
+
+```json
+{
+  "success": true,
+  "user": {
+    "id": "user_123",
+    "email": "user@example.com",
+    "name": "John Doe",
+    "role": "USER",
+    "planTier": "starter"
+  },
+  "tokens": {
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+  },
+  "message": "Login successful"
+}
+```
+
+## Error Responses
+
+<ResponseField name="400" type="object">
+  Missing email or password
+</ResponseField>
+
+<ResponseField name="401" type="object">
+  Invalid credentials
+</ResponseField>
+
+<ResponseField name="403" type="object">
+  Email not verified
+</ResponseField>
+

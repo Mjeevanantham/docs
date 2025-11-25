@@ -1,0 +1,128 @@
+---
+title: "Notion Integration"
+description: "Sync your Notion workspace with Convosphere AI"
+---
+
+## Overview
+
+The Notion integration allows you to sync your Notion workspace pages and databases to train your agents.
+
+## Prerequisites
+
+- A Notion workspace
+- A Notion integration (created at [notion.so/my-integrations](https://www.notion.so/my-integrations))
+
+## Step-by-Step Setup
+
+### Step 1: Create a Notion Integration
+
+1. Go to [notion.so/my-integrations](https://www.notion.so/my-integrations)
+2. Click **+ New integration**
+3. Give it a name (e.g., "Convosphere AI")
+4. Select your workspace
+5. Copy the **Internal Integration Token** (you'll need this)
+
+### Step 2: Connect Notion to Your Agent
+
+1. Go to your agent dashboard
+2. Navigate to the **Knowledge Base** or **Sources** tab
+3. Click **Connect Notion** or **Add Notion Source**
+4. You'll be redirected to Notion to authorize the connection
+5. Select the pages and databases you want to sync
+6. Click **Allow** to complete the connection
+
+### Step 3: Sync Content
+
+After connecting:
+
+- Your Notion pages will be synced automatically
+- You can manually trigger a sync from the agent dashboard
+- Pages and databases will be processed and added to your agent's knowledge base
+
+## Notion Integration Features
+
+- **Automatic Sync**: Pages are synced automatically when updated in Notion
+- **Selective Sync**: Choose which pages and databases to sync
+- **Real-time Updates**: Changes in Notion are reflected in your agent
+- **Database Support**: Sync Notion databases as structured data
+
+## Syncing Notion Pages
+
+1. Go to **Notion Sources** in your agent dashboard
+2. Click **Add Page**
+3. Select pages to sync
+4. Click **Add**
+
+Pages will be processed and added to your knowledge base.
+
+## Syncing Notion Databases
+
+1. Go to **Notion Sources** in your agent dashboard
+2. Click **Add Database**
+3. Select databases to sync
+4. Configure sync options
+5. Click **Add**
+
+Database entries will be processed and added to your knowledge base.
+
+## Managing Notion Connections
+
+### Viewing Connections
+
+1. Go to **Knowledge Base** → **Notion Sources**
+2. View all connected Notion workspaces
+3. See sync status and last sync time
+
+### Manual Sync
+
+1. Go to **Notion Sources**
+2. Click **Sync Now** next to a connection
+3. Wait for sync to complete
+
+### Disconnecting Notion
+
+1. Go to **Notion Sources**
+2. Find the connection you want to disconnect
+3. Click **Disconnect**
+4. Confirm the action
+
+## Troubleshooting
+
+### Connection Fails
+
+- Verify Notion integration credentials are correct
+- Check that the integration has access to your workspace
+- Ensure required permissions are granted
+
+### Pages Not Syncing
+
+- Check connection status
+- Verify pages are accessible to the integration
+- Review sync logs for errors
+- Try manual sync
+
+### Sync Errors
+
+- Check Notion API rate limits
+- Verify pages haven't been deleted
+- Review error messages in dashboard
+- Contact support if issues persist
+
+## Best Practices
+
+1. **Organize Content**: Use clear page and database names in Notion
+2. **Regular Updates**: Keep Notion content updated
+3. **Selective Sync**: Only sync relevant pages
+4. **Monitor Syncs**: Check sync status regularly
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Knowledge Base Guide" icon="database" href="/guides/knowledge-base">
+    Learn about knowledge base management
+  </Card>
+  <Card title="Agent Guide" icon="robot" href="/guides/agents">
+    Configure your agent
+  </Card>
+</CardGroup>
+

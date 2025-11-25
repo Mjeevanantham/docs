@@ -1,0 +1,29 @@
+---
+title: "Delete Agent"
+api: "DELETE /api/agents/{agentId}"
+---
+
+## Description
+
+Delete an agent. This action cannot be undone.
+
+## Authentication
+
+Required (API key or JWT token)
+
+## Path Parameters
+
+<ParamField path="agentId" type="string" required>
+  The ID of the agent to delete
+</ParamField>
+
+## Response
+
+<ResponseField name="success" type="boolean">
+  Whether the deletion was successful
+</ResponseField>
+
+<Warning>
+This action cannot be undone. All agent data, conversations, and knowledge base content will be permanently deleted.
+</Warning>
+

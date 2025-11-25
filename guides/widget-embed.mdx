@@ -1,0 +1,293 @@
+---
+title: "Widget Embed"
+description: "Install and customize the chat widget"
+---
+
+## Quick Installation
+
+Add this script tag to your website (before the closing `</body>` tag):
+
+```html
+<script
+  chatbot-id="YOUR_AGENT_ID"
+  data-type="bubble"
+  src="https://your-domain.com/bot/convosphereai-loader.min.js"
+></script>
+```
+
+Replace `YOUR_AGENT_ID` with your actual agent ID (found in your agent dashboard).
+
+## Widget Types
+
+### Bubble Widget (Default)
+
+The bubble widget appears as a floating button in the bottom-right corner of your page.
+
+```html
+<script
+  chatbot-id="YOUR_AGENT_ID"
+  data-type="bubble"
+  src="https://your-domain.com/bot/convosphereai-loader.min.js"
+></script>
+```
+
+### Inline Widget
+
+Embed the chat directly in your page content.
+
+```html
+<iframe
+  src="https://your-domain.com/bot/preview?agent=YOUR_AGENT_ID&embedded=1&type=inline"
+  width="100%"
+  height="600px"
+  frameborder="0"
+>
+</iframe>
+```
+
+### Full Page Widget
+
+Display the chat as a full-page interface.
+
+```html
+<iframe
+  src="https://your-domain.com/bot/preview?agent=YOUR_AGENT_ID&embedded=1&type=fullpage"
+  width="100%"
+  height="100vh"
+  frameborder="0"
+>
+</iframe>
+```
+
+## Configuration Options
+
+### Basic Configuration
+
+```html
+<script
+  chatbot-id="YOUR_AGENT_ID"
+  data-type="bubble"
+  data-position="bottom-right"
+  data-primary-color="#2563eb"
+  src="https://your-domain.com/bot/convosphereai-loader.min.js"
+></script>
+```
+
+### Available Attributes
+
+- `chatbot-id` (required): Your agent ID
+- `data-type`: Widget type (`bubble`, `inline`, `fullpage`)
+- `data-position`: Position for bubble widget (`bottom-right`, `bottom-left`, `top-right`, `top-left`)
+- `data-primary-color`: Primary color (hex code)
+- `data-base-url`: Custom base URL (if using custom domain)
+
+## Customization
+
+### Appearance Settings
+
+Customize your widget's appearance from the agent dashboard:
+
+1. Go to your agent dashboard
+2. Navigate to **Widget** or **Settings** → **Widget**
+3. Customize:
+   - **Primary Color**: Main brand color
+   - **Launcher Icon**: Icon style (bot, chat, custom)
+   - **Launcher Shape**: Circle or square
+   - **Widget Style**: Glass, solid, or minimal
+
+### Behavior Settings
+
+Configure how your widget behaves:
+
+- **Auto-open Mode**:
+  - `manual` - User clicks to open
+  - `auto` - Opens automatically after delay
+  - `never` - Never auto-opens
+- **Auto-open Delay**: Delay in milliseconds before auto-opening
+- **Auto-open Once**: Only auto-open once per session
+- **Allow File Uploads**: Enable/disable file uploads
+- **Enable Suggested Replies**: Show suggested response options
+- **Enable Typing Indicator**: Show typing animation
+
+### Content Customization
+
+Customize the widget's content:
+
+- **Title**: Widget header title
+- **Subtitle**: Widget header subtitle
+- **Initial Message**: First message shown to users
+- **Input Placeholder**: Placeholder text in input field
+- **Suggested Questions**: Pre-defined questions users can click
+
+## React Integration
+
+For React applications, use the `useEffect` hook:
+
+```jsx
+import { useEffect } from "react";
+
+function MyComponent() {
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://your-domain.com/bot/convosphereai-loader.min.js";
+    script.defer = true;
+    script.dataset.chatbotId = "YOUR_AGENT_ID";
+    script.dataset.type = "bubble";
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  return <div>Your content</div>;
+}
+```
+
+## React Native Integration
+
+For React Native applications, use WebView:
+
+```jsx
+import { WebView } from "react-native-webview";
+
+export function ConvosphereAgent() {
+  const agentUrl =
+    "https://your-domain.com/bot/preview?agent=YOUR_AGENT_ID&embedded=1";
+
+  return (
+    <WebView
+      source={{ uri: agentUrl }}
+      originWhitelist={["*"]}
+      allowsInlineMediaPlayback
+    />
+  );
+}
+```
+
+## SPA (Single Page Application) Compatibility
+
+The widget works with SPAs. For dynamic route changes:
+
+```javascript
+// Re-initialize widget on route change (if needed)
+window.convosphereWidget?.reload?.();
+```
+
+## Event Listeners
+
+Listen to widget events:
+
+```javascript
+// Widget opened
+window.addEventListener("convosphere:open", (event) => {
+  console.log("Widget opened", event.detail);
+});
+
+// Widget closed
+window.addEventListener("convosphere:close", (event) => {
+  console.log("Widget closed", event.detail);
+});
+
+// Message sent
+window.addEventListener("convosphere:message:sent", (event) => {
+  console.log("Message sent", event.detail);
+});
+
+// Message received
+window.addEventListener("convosphere:message:received", (event) => {
+  console.log("Message received", event.detail);
+});
+```
+
+## Multi-Agent Setup
+
+You can embed multiple agents on the same page:
+
+```html
+<!-- Agent 1 -->
+<script
+  chatbot-id="AGENT_1_ID"
+  data-type="bubble"
+  data-position="bottom-right"
+  src="https://your-domain.com/bot/convosphereai-loader.min.js"
+></script>
+
+<!-- Agent 2 -->
+<script
+  chatbot-id="AGENT_2_ID"
+  data-type="bubble"
+  data-position="bottom-left"
+  src="https://your-domain.com/bot/convosphereai-loader.min.js"
+></script>
+```
+
+## Lazy Loading
+
+Load the widget only when needed:
+
+```javascript
+function loadWidget() {
+  if (document.getElementById("convosphere-widget")) {
+    return; // Already loaded
+  }
+
+  const script = document.createElement("script");
+  script.src = "https://your-domain.com/bot/convosphereai-loader.min.js";
+  script.dataset.chatbotId = "YOUR_AGENT_ID";
+  script.dataset.type = "bubble";
+  document.body.appendChild(script);
+}
+
+// Load on user interaction
+document.addEventListener("click", loadWidget, { once: true });
+```
+
+## Troubleshooting
+
+### Widget Not Appearing
+
+- Verify the agent ID is correct
+- Check browser console for errors
+- Ensure the script is loaded before page unload
+- Check that the base URL is correct
+
+### Widget Not Responding
+
+- Check network connectivity
+- Verify agent is active
+- Check browser console for API errors
+- Ensure authentication is working
+
+### Styling Issues
+
+- Clear browser cache
+- Check for CSS conflicts
+- Verify widget settings in dashboard
+- Try in incognito mode
+
+## Best Practices
+
+1. **Load Script at End**: Place script before `</body>` tag
+2. **Use HTTPS**: Always use HTTPS for production
+3. **Test on Mobile**: Verify widget works on mobile devices
+4. **Monitor Performance**: Check widget load time
+5. **Handle Errors**: Implement error handling for failed loads
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Agent Guide" icon="robot" href="/guides/agents">
+    Learn about agent configuration
+  </Card>
+  <Card title="Webhooks" icon="plug" href="/integrations/webhooks">
+    Event handling
+  </Card>
+  <Card
+    title="API Reference"
+    icon="terminal"
+    href="/api-reference/introduction"
+  >
+    Programmatic control
+  </Card>
+</CardGroup>

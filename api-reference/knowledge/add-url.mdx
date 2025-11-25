@@ -1,0 +1,37 @@
+---
+title: "Add URL"
+api: "POST /api/agents/{agentId}/knowledge/url"
+---
+
+## Description
+
+Add a URL to the knowledge base for scraping.
+
+## Authentication
+
+Required (API key or JWT token)
+
+## Request Body
+
+<ParamField body="url" type="string" required>
+  The URL to scrape
+</ParamField>
+
+<ParamField body="config" type="object">
+  Scraping configuration (crawlDepth, maxPages, etc.)
+</ParamField>
+
+## Response
+
+<ResponseField name="success" type="boolean">
+  Whether URL was added successfully
+</ResponseField>
+
+<ResponseField name="documentId" type="string">
+  ID of the created document
+</ResponseField>
+
+<ResponseField name="jobId" type="string">
+  ID of the scraping job
+</ResponseField>
+

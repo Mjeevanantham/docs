@@ -1,0 +1,76 @@
+---
+title: "Signup"
+api: "POST /api/auth/signup"
+---
+
+## Description
+
+Create a new user account.
+
+## Authentication
+
+None (public endpoint)
+
+## Request Body
+
+<ParamField body="name" type="string" required>
+  User's full name
+</ParamField>
+
+<ParamField body="email" type="string" required>
+  User's email address
+</ParamField>
+
+<ParamField body="password" type="string" required>
+  User's password (minimum 8 characters)
+</ParamField>
+
+<ParamField body="company" type="string">
+  Optional company name
+</ParamField>
+
+<ParamField body="country" type="string">
+  Optional country code
+</ParamField>
+
+## Response
+
+<ResponseField name="success" type="boolean">
+  Whether the signup was successful
+</ResponseField>
+
+<ResponseField name="user" type="object">
+  Created user object
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  Success message
+</ResponseField>
+
+## Example Request
+
+```bash
+curl -X POST https://api.convosphere.ai/api/auth/signup \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "John Doe",
+    "email": "user@example.com",
+    "password": "secure-password",
+    "company": "Acme Corp"
+  }'
+```
+
+## Example Response
+
+```json
+{
+  "success": true,
+  "user": {
+    "id": "user_123",
+    "email": "user@example.com",
+    "name": "John Doe"
+  },
+  "message": "Account created successfully. Please check your email to verify your account."
+}
+```
+

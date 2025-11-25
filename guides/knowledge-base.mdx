@@ -1,0 +1,290 @@
+---
+title: "Knowledge Base"
+description: "Build and manage your agent's knowledge base"
+---
+
+## Overview
+
+A knowledge base is a collection of information that your agent uses to answer questions. You can add:
+
+- Documents (PDF, Word, Text files)
+- Web pages and websites
+- Notion pages and databases
+
+## Adding Documents
+
+### Supported Formats
+
+- **PDF** (.pdf)
+- **Microsoft Word** (.doc, .docx)
+- **Text Files** (.txt)
+- **Markdown** (.md)
+
+### Upload Process
+
+1. Go to your agent dashboard
+2. Navigate to **Knowledge Base** or **Sources**
+3. Click **Upload Document**
+4. Select one or more files
+5. Wait for processing to complete
+
+### Document Processing
+
+Documents go through these stages:
+
+1. **Upload**: File is uploaded to storage
+2. **Extraction**: Text is extracted from the file
+3. **Chunking**: Content is split into manageable chunks
+4. **Embedding**: Chunks are converted to embeddings
+5. **Indexing**: Embeddings are stored in the vector database
+6. **Ready**: Document is ready for use
+
+### Document Status
+
+- **Pending**: Waiting to be processed
+- **Processing**: Currently being processed
+- **Indexed**: Successfully processed and ready
+- **Failed**: Processing failed (check error message)
+
+## Adding URLs
+
+### Single Page Scraping
+
+Scrape a single web page:
+
+1. Go to **Knowledge Base**
+2. Click **Add URL**
+3. Enter the URL
+4. Leave **Crawl Depth** at 0
+5. Click **Add**
+
+### Site Crawling
+
+Crawl an entire website:
+
+1. Go to **Knowledge Base**
+2. Click **Add URL**
+3. Enter the homepage URL
+4. Configure options:
+
+   - **Crawl Depth**: How many levels to crawl (1-3 recommended)
+   - **Max Pages**: Maximum pages to scrape (50-500)
+   - **Follow External Links**: Whether to follow links outside the domain
+   - **Respect robots.txt**: Follow robots.txt rules
+   - **Follow Sitemap**: Use sitemap.xml if available
+
+5. Click **Add**
+
+### Advanced Scraping Options
+
+- **Include Paths**: Only crawl URLs matching these patterns
+- **Exclude Paths**: Skip URLs matching these patterns
+- **Content Selectors**: CSS selectors for main content
+- **Exclude Selectors**: CSS selectors to exclude (nav, footer, etc.)
+- **Wait For Selector**: Wait for element before scraping
+- **Delay**: Delay between requests (milliseconds)
+- **Timeout**: Request timeout (milliseconds)
+
+### URL Processing
+
+URLs go through the same processing stages as documents:
+
+1. **Pending**: Queued for scraping
+2. **Scraping**: Currently being scraped
+3. **Processing**: Content is being processed
+4. **Indexed**: Ready for use
+5. **Failed**: Scraping or processing failed
+
+## Notion Integration
+
+### Connecting Notion
+
+1. Go to **Knowledge Base**
+2. Click **Connect Notion**
+3. Authorize the connection in Notion
+4. Select pages and databases to sync
+5. Click **Allow**
+
+### Syncing Notion Content
+
+After connecting:
+
+- **Automatic Sync**: Pages sync automatically when updated
+- **Manual Sync**: Click **Sync Now** to force a sync
+- **Selective Sync**: Choose which pages to sync
+
+### Notion Pages
+
+Sync individual pages:
+
+1. Go to **Notion Sources**
+2. Click **Add Page**
+3. Select pages to sync
+4. Click **Add**
+
+### Notion Databases
+
+Sync entire databases:
+
+1. Go to **Notion Sources**
+2. Click **Add Database**
+3. Select databases to sync
+4. Configure sync options
+5. Click **Add**
+
+## Managing Knowledge Base
+
+### Viewing Documents
+
+1. Go to **Knowledge Base**
+2. View all documents with their status
+3. Click on a document to see details
+
+### Document Details
+
+- **Name**: Document name
+- **Type**: File type or URL
+- **Status**: Processing status
+- **Size**: File size or page count
+- **Chunks**: Number of text chunks
+- **Created**: When it was added
+- **Updated**: Last update time
+
+### Re-processing Documents
+
+If a document fails or needs updating:
+
+1. Go to document details
+2. Click **Re-process** or **Re-scrape**
+3. Wait for processing to complete
+
+### Deleting Documents
+
+1. Go to **Knowledge Base**
+2. Find the document
+3. Click **Delete**
+4. Confirm deletion
+
+<Warning>
+  Deleting a document removes it from the knowledge base permanently.
+</Warning>
+
+## Best Practices
+
+### Document Quality
+
+1. **Clear Structure**: Use headings and sections
+2. **Accurate Content**: Ensure information is correct and up-to-date
+3. **Relevant Topics**: Focus on topics your agent needs to know
+4. **Avoid Duplicates**: Don't add the same content multiple times
+
+### URL Scraping
+
+1. **Start Small**: Begin with single pages before crawling entire sites
+2. **Respect Limits**: Be mindful of scraping quotas
+3. **Test First**: Test with a single page before site crawling
+4. **Monitor Status**: Check scraping status regularly
+
+### Notion Sync
+
+1. **Organize Content**: Use clear page and database names
+2. **Regular Updates**: Keep Notion content updated
+3. **Selective Sync**: Only sync relevant pages
+4. **Monitor Syncs**: Check sync status regularly
+
+## Training Your Agent
+
+### RAG (Retrieval Augmented Generation)
+
+With RAG enabled, your agent:
+
+1. Receives a user question
+2. Searches the knowledge base for relevant content
+3. Uses that content as context
+4. Generates an answer based on the context
+
+### Enabling RAG
+
+1. Go to agent settings
+2. Set **Training Mode** to **RAG**
+3. Ensure knowledge base has content
+4. Save settings
+
+### Testing RAG
+
+1. Go to agent chat
+2. Ask questions related to your knowledge base
+3. Verify agent uses knowledge base content
+4. Review response quality
+
+## Limits and Quotas
+
+### Document Limits
+
+- **File Size**: Maximum 10MB per file
+- **Total Documents**: Varies by plan
+- **Processing Time**: Depends on file size and complexity
+
+### URL Scraping Limits
+
+- **Free Plan**: 10 pages per month
+- **Starter Plan**: 100 pages per month
+- **Business Plan**: 1,000 pages per month
+- **Pro Plan**: 10,000 pages per month
+
+### Notion Sync Limits
+
+- **Pages per Sync**: 1,000 pages
+- **Sync Frequency**: Once per hour (automatic)
+- **Manual Syncs**: Unlimited
+
+## Troubleshooting
+
+### Documents Not Processing
+
+- Check document format is supported
+- Verify file size is within limits
+- Review error messages
+- Try re-uploading
+
+### URLs Not Scraping
+
+- Verify URL is accessible
+- Check scraping quota
+- Review scraping configuration
+- Check for robots.txt restrictions
+
+### Notion Not Syncing
+
+- Verify Notion connection is active
+- Check selected pages are accessible
+- Review sync status
+- Try manual sync
+
+### Poor Agent Responses
+
+- Ensure knowledge base has relevant content
+- Verify RAG is enabled
+- Check document quality
+- Review knowledge base coverage
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Agent Configuration" icon="robot" href="/guides/agents">
+    Learn about agent setup
+  </Card>
+  <Card title="Notion Integration" icon="plug" href="/integrations/notion">
+    Detailed Notion setup
+  </Card>
+  <Card
+    title="API Reference"
+    icon="terminal"
+    href="/api-reference/introduction"
+  >
+    Programmatic access
+  </Card>
+  <Card title="Widget Embed" icon="code" href="/guides/widget-embed">
+    Deploy your agent
+  </Card>
+</CardGroup>

@@ -1,0 +1,61 @@
+---
+title: "Shopify Integration"
+description: "Connect your Shopify store"
+---
+
+## Overview
+
+Connect your Shopify store to provide product information and order support.
+
+## Setup Steps
+
+### Step 1: Create a Shopify App
+
+1. Go to your Shopify admin
+2. Navigate to **Apps** → **Develop apps**
+3. Create a new app
+4. Configure API scopes:
+   - `read_products`
+   - `write_products`
+   - `read_orders`
+   - `write_orders`
+
+### Step 2: Get OAuth Credentials
+
+1. Copy your **Client ID** and **Client Secret**
+2. Set the redirect URL: `https://your-domain.com/api/integrations/oauth/shopify/callback`
+
+### Step 3: Connect in Convosphere
+
+1. Go to **Integrations** in your agent dashboard
+2. Click **Add Integration** → **Shopify**
+3. Enter your store domain
+4. Authorize the connection
+
+## Features
+
+- Access product information
+- View and manage orders
+- Customer data integration
+- Real-time sync
+
+## Troubleshooting
+
+### Connection Fails
+
+- Verify store domain is correct
+- Check OAuth credentials
+- Ensure API scopes are granted
+
+### Data Not Syncing
+
+- Check integration status
+- Verify API permissions
+- Review sync logs
+
+## Next Steps
+
+<Card title="Integration Overview" icon="plug" href="/integrations/overview">
+  Learn about other integrations
+</Card>
+

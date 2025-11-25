@@ -1,0 +1,130 @@
+---
+title: "Integrations Overview"
+description: "Connect Convosphere AI with popular services"
+---
+
+## Integration Types
+
+Convosphere AI supports three types of integrations:
+
+1. **OAuth Integrations**: Connect using OAuth 2.0 (e.g., Notion, Slack, Shopify)
+2. **API Key Integrations**: Connect using API keys (e.g., Email, WhatsApp)
+3. **Webhook Integrations**: Receive events via webhooks (e.g., Zapier, n8n)
+
+## Available Integrations
+
+### CRM Integrations
+
+- **HubSpot**: Sync contacts, deals, and tickets
+- **Salesforce**: Sync leads, opportunities, and cases
+
+### Communication Integrations
+
+- **Slack**: Send messages to Slack channels, receive notifications
+- **Email**: Send and receive emails via SMTP
+
+### E-commerce Integrations
+
+- **Shopify**: Access products, orders, and customer data
+
+### Automation Integrations
+
+- **Zapier**: Trigger workflows and receive events
+- **n8n**: Trigger workflows and receive events
+
+### Knowledge Base Integrations
+
+- **Notion**: Sync pages and databases for agent training
+
+## Setting Up Integrations
+
+### General Steps
+
+1. Go to your agent dashboard
+2. Navigate to **Integrations**
+3. Click **Add Integration**
+4. Select the integration you want to connect
+5. Follow the setup instructions
+6. Authorize the connection
+7. Configure settings
+8. Test the connection
+
+## Integration Status
+
+Integrations can have the following statuses:
+
+- **Active**: Integration is connected and working
+- **Inactive**: Integration is disconnected or paused
+- **Error**: Integration has an error (check configuration)
+- **Pending**: Integration is being set up
+
+## Managing Integrations
+
+### Viewing Your Integrations
+
+1. Go to your agent dashboard
+2. Navigate to **Integrations**
+3. You'll see all connected integrations with their status
+
+### Testing Integrations
+
+1. Click on an integration to view details
+2. Click **Test Connection** to verify it's working
+3. Check the status and any error messages
+
+### Disconnecting Integrations
+
+1. Go to **Integrations** in your agent dashboard
+2. Find the integration you want to disconnect
+3. Click **Disconnect** or **Remove**
+4. Confirm the action
+
+## Troubleshooting
+
+### Common Issues
+
+**OAuth Connection Fails**:
+- Check that redirect URLs match exactly
+- Verify OAuth credentials are correct
+- Ensure required scopes are granted
+
+**API Key Not Working**:
+- Verify the API key is correct
+- Check that the key hasn't expired
+- Ensure the key has the required permissions
+
+**Webhook Not Receiving Events**:
+- Verify the webhook URL is accessible
+- Check webhook signature verification
+- Review webhook logs for errors
+
+**Integration Sync Fails**:
+- Check integration status
+- Review error messages in the dashboard
+- Verify credentials are still valid
+
+## Best Practices
+
+1. **Use Descriptive Names**: Name your integrations clearly (e.g., "Production Notion Workspace")
+2. **Test Before Production**: Always test integrations in a development environment first
+3. **Monitor Status**: Regularly check integration status for errors
+4. **Secure Credentials**: Never share integration credentials
+5. **Review Permissions**: Only grant necessary permissions to integrations
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Notion Integration" icon="database" href="/integrations/notion">
+    Connect your Notion workspace
+  </Card>
+  <Card title="Slack Integration" icon="slack" href="/integrations/slack">
+    Connect Slack
+  </Card>
+  <Card title="Shopify Integration" icon="shopify" href="/integrations/shopify">
+    Connect your store
+  </Card>
+  <Card title="Webhooks" icon="plug" href="/integrations/webhooks">
+    Set up webhooks
+  </Card>
+</CardGroup>
+

@@ -1,0 +1,113 @@
+---
+title: "Send Message"
+api: "POST /api/agents/{agentId}/chat"
+---
+
+## Description
+
+Send a message to an agent and receive a response.
+
+## Authentication
+
+Required (API key or JWT token)
+
+## Path Parameters
+
+<ParamField path="agentId" type="string" required>
+  The ID of the agent to chat with
+</ParamField>
+
+## Request Body
+
+<ParamField body="message" type="string" required>
+  The message to send to the agent
+</ParamField>
+
+<ParamField body="threadId" type="string">
+  Optional thread ID for conversation continuity
+</ParamField>
+
+<ParamField body="stream" type="boolean">
+  Whether to stream the response (default: false)
+</ParamField>
+
+<ParamField body="attachments" type="array">
+  Optional file attachments
+</ParamField>
+
+## Response
+
+<ResponseField name="message" type="string">
+  The agent's response message
+</ResponseField>
+
+<ResponseField name="model" type="string">
+  The AI model used
+</ResponseField>
+
+<ResponseField name="tokensUsed" type="object">
+  Token usage statistics (prompt, completion, total)
+</ResponseField>
+
+<ResponseField name="ragChunksUsed" type="number">
+  Number of knowledge base chunks used
+</ResponseField>
+
+## Example Request
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer conv_YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "message": "Hello, how can you help?",
+    "threadId": "thread_123",
+    "stream": false
+  }' \
+  https://api.convosphere.ai/api/agents/agent_123/chat
+```
+
+## Example Response
+
+```json
+{
+  "message": "Hello! I'm here to help...",
+  "model": "gpt-4",
+  "tokensUsed": {
+    "prompt": 150,
+    "completion": 50,
+    "total": 200
+  },
+  "ragChunksUsed": 3
+}
+```
+
+## Streaming Response
+
+When `stream: true`, the response is sent as Server-Sent Events (SSE):
+
+```
+data: {"chunk": "Hello"}
+data: {"chunk": "!"}
+data: {"chunk": " How"}
+data: [DONE]
+```
+
+## Error Responses
+
+<ResponseField name="400" type="object">
+  Bad Request - Missing message or invalid parameters
+</ResponseField>
+
+<ResponseField name="401" type="object">
+  Unauthorized - Invalid or missing authentication
+</ResponseField>
+
+<ResponseField name="403" type="object">
+  Forbidden - No access to this agent
+</ResponseField>
+
+<ResponseField name="404" type="object">
+  Not Found - Agent not found
+</ResponseField>
+

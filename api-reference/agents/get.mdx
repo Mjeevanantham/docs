@@ -1,0 +1,32 @@
+---
+title: "Get Agent"
+api: "GET /api/agents/{agentId}"
+---
+
+## Description
+
+Get a specific agent by ID.
+
+## Authentication
+
+Required (API key or JWT token)
+
+## Path Parameters
+
+<ParamField path="agentId" type="string" required>
+  The ID of the agent
+</ParamField>
+
+## Response
+
+<ResponseField name="agent" type="object">
+  Agent object with all details
+</ResponseField>
+
+## Example Request
+
+```bash
+curl -H "Authorization: Bearer conv_YOUR_API_KEY" \
+  https://api.convosphere.ai/api/agents/agent_123
+```
+

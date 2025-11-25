@@ -1,0 +1,25 @@
+---
+title: "List Providers"
+api: "GET /api/integrations/providers"
+---
+
+## Description
+
+Get available integration providers.
+
+## Authentication
+
+Required (API key or JWT token)
+
+## Query Parameters
+
+<ParamField query="category" type="string">
+  Filter by category (crm, communication, ecommerce, automation)
+</ParamField>
+
+## Response
+
+<ResponseField name="providers" type="array">
+  Array of provider objects with name, code, type, category, etc.
+</ResponseField>
+

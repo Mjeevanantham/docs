@@ -1,0 +1,74 @@
+---
+title: "Create Agent"
+api: "POST /api/agents"
+---
+
+## Description
+
+Create a new AI agent.
+
+## Authentication
+
+Required (API key or JWT token)
+
+## Request Body
+
+<ParamField body="name" type="string" required>
+  Agent name
+</ParamField>
+
+<ParamField body="description" type="string">
+  Agent description
+</ParamField>
+
+<ParamField body="systemPrompt" type="string">
+  System prompt defining agent behavior
+</ParamField>
+
+<ParamField body="model" type="string">
+  AI model to use (e.g., "gpt-4", "claude-3-opus")
+</ParamField>
+
+## Response
+
+<ResponseField name="agent" type="object">
+  Created agent object
+</ResponseField>
+
+## Example Request
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer conv_YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Customer Support Bot",
+    "description": "Helps customers with support questions",
+    "systemPrompt": "You are a helpful support agent...",
+    "model": "gpt-4"
+  }' \
+  https://api.convosphere.ai/api/agents
+```
+
+## Example Response
+
+```json
+{
+  "agent": {
+    "id": "agent_123",
+    "name": "Customer Support Bot",
+    "description": "Helps customers with support questions",
+    "systemPrompt": "You are a helpful support agent...",
+    "model": "gpt-4",
+    "status": "active",
+    "createdAt": "2024-01-15T10:00:00Z"
+  }
+}
+```
+
+## Error Responses
+
+<ResponseField name="403" type="object">
+  Agent limit reached for current plan
+</ResponseField>
+

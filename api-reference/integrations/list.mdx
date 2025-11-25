@@ -1,0 +1,29 @@
+---
+title: "List Integrations"
+api: "GET /api/integrations"
+---
+
+## Description
+
+Get all integrations for the authenticated user.
+
+## Authentication
+
+Required (API key or JWT token)
+
+## Query Parameters
+
+<ParamField query="agentId" type="string">
+  Filter by agent ID
+</ParamField>
+
+<ParamField query="organizationId" type="string">
+  Filter by organization ID
+</ParamField>
+
+## Response
+
+<ResponseField name="integrations" type="array">
+  Array of integration objects
+</ResponseField>
+
