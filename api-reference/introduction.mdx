@@ -6,7 +6,7 @@ description: "Complete API documentation for Convosphere AI"
 ## Base URL
 
 ```
-https://api.convosphere.ai/api
+https://api.convosphere.site/api
 ```
 
 ## Authentication
@@ -156,14 +156,14 @@ export CONVOSPHERE_API_KEY="conv_YOUR_API_KEY"
 
 # List your agents
 curl -H "Authorization: Bearer $CONVOSPHERE_API_KEY" \
-  https://api.convosphere.ai/api/agents
+  https://api.convosphere.site/api/agents
 
 # Send a message
 curl -X POST \
   -H "Authorization: Bearer $CONVOSPHERE_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"message": "Hello", "stream": false}' \
-  https://api.convosphere.ai/api/agents/agent_123/chat
+  https://api.convosphere.site/api/agents/agent_123/chat
 ```
 
 ## Next Steps

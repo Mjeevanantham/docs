@@ -116,12 +116,12 @@
       "anchors": [
         {
           "anchor": "Dashboard",
-          "href": "https://app.convosphere.ai",
+          "href": "https://app.convosphere.site",
           "icon": "rocket"
         },
         {
           "anchor": "Support",
-          "href": "mailto:support@convosphere.ai",
+          "href": "mailto:hello@convosphere.site",
           "icon": "envelope"
         }
       ]
@@ -135,13 +135,13 @@
     "links": [
       {
         "label": "Support",
-        "href": "mailto:support@convosphere.ai"
+        "href": "mailto:hello@convosphere.site"
       }
     ],
     "primary": {
       "type": "button",
       "label": "Get Started",
-      "href": "https://app.convosphere.ai/signup"
+      "href": "https://app.convosphere.site/signup"
     }
   },
   "contextual": {
